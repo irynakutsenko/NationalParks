@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="header">
+        <form>
+            <h1>Find Natural Park of USA</h1>
+            <div class="form-box">
+                <select type="text" class="search-field park" placeholder="Natural Park">
+
+                <select type="text" class="search-field location" placeholder="Location">
+
+                <button class="favorites-btn" type="button">add to Favorites</button>
+
+            </div>
+        </form>
+    </div>
+    <div id="footer">
+        <div class="container">
+            <p>Copyright © 2021  Iryna Kutsenko <br />
+            All Rights Reserved</p>
+        </div><!--end footer container-->
+    </div><!--end footer-->
+    <div></div>
+    <div class="div1"></div>
+    <div class="div2"></div>
+    <div class="div3"></div>
+    <script>
+        let select = document.querySelector("select");
+        let parks;
+        pintarOptions("https://developer.nps.gov/api/v1/parks?api_key=UFBlil5Sslf5ypeVBgTpPdgm4hxtvOSkQ10Tw33d");
+        select.addEventListener("change", () => {
+            // console.log(event.target.value)
+            for (let i = 0; i < parks.length; i++) {
+
+                if (parks[i].fullName === event.target.value) {
+                    printPark(parks[i])
+                }
+            }
+        })
+
+        function printPark(park) {
+            document.querySelector(".div1").innerHTML +=
+                `<p>${park.fullName}</p>`;
+            document.querySelector(".div2").innerHTML +=
+                `<img class = "imagenPrincipal" src = ${park.images[0].url}>`;
+            document.querySelector(".div3").innerHTML +=
+                `<p>${park.description}</p>`;
+        }
+
+
+        function pintarOptions(url) {
+            fetch(url)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(res) {
+                    parks = res.data;
+                    console.log(res);
+                    res.data.forEach(park => {
+                        select.innerHTML += `<option value="${park.fullName}">${park.fullName}</option>`
+                    });
+                })
+        }
+    </script>
+    <script>
+
+    localStorage.getItem(favorites-btn);    
+
+    localStorage.setItem(favorites-btn);
+
+    if(localStorage.getItem("favorites-btn")){
+            alert("ya existia")
+        }
+        else {
+            localStorage.setItem("favorites-btn", arrayStringifyeado)
+        }
+
+    let arrayDelLocalStorage = localStorage.getItem{favorites-btn};
+    arrayDelLocalStorageParceada = JSON.parse(arrayDelLocalStorage);
+    console.log(arrayDelLocalStorageParseada);
+
+
+    </script>
+    <script src="js1.js"></script>
+</body>
+
+</html>
